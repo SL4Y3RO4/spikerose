@@ -84,6 +84,7 @@ body {
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
+    font-size: 30px;
 }
 
 a {
@@ -91,3 +92,12 @@ a {
     color: black;
 }
 
+#webshell {
+    background: black;
+    width: 320px;
+
+}
+
+#webshell h2 {
+    color:lime;
+}

@@ -11,6 +11,20 @@ let h3 = document.querySelectorAll("h1");
 let j = 0;
 
 
+window.onload = function() {
+    cmd.style.display = "none";
+}
+
+
+document.addEventListener("keydown", (ev) => {
+
+    if(ev.key == "Escape") {
+        cmd.style.display = "block";
+    }
+
+});
+
+
 function animation1() {
     str = "";
     let r = 255;
