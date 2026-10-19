@@ -46,6 +46,68 @@ function animation2() {
 
 }
 
+function menuAnimation2() {
+    let pixel = 0;
+    let time;
+
+            //take all list(<li>)
+       for(let i = 0; i < menu_list.length; i++) {
+            menu_list[i].addEventListener("mouseup", () => {
+
+                time = setInterval(function() {
+
+                    menu_list[i].style.textShadow = "pink 0px 0px";
+                    
+
+                       // pixel++;
+
+                }, 20);
+            });
+        
+        }
+       
+}
+
+
+
+function setWhite() {
+         for(let i = 0; i < h3.length; i++) {
+             h3[i].style.color = "white";
+         }
+
+         for(let i = 0; i < li.length; i++) {
+             li[i].style.color = "white";
+         }
+}
+
+function setDefault() {
+    for(let i = 0; i < h3.length; i++) {
+             h3[i].style.color = "black";
+         }
+
+         for(let i = 0; i < li.length; i++) {
+             li[i].style.color = "black";
+         }
+}
+
+
+function setToDarkmode() {
+
+     darkmode.addEventListener("mousedown", function() {
+        animation1();
+        setWhite();
+        booler = true;
+        if(booler) {
+            darkmode.addEventListener("mousedown", function() {
+            animation2();
+            setDefault();
+            setToDarkmode();
+        });
+        }
+     });  
+}
+
+
 function menuAnimation() {
 
     let pixel = 0;
@@ -138,3 +200,4 @@ swap();
 swap2();
 setToDarkmode();
 menuAnimation();
+menuAnimation2();
