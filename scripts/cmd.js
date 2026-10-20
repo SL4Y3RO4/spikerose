@@ -4,6 +4,17 @@ let textField = document.querySelector("input[type=text]");
 let closeButton = document.getElementById("closeButton");
 let isPressed = false;
 
+
+document.addEventListener("keydown", (ev) => {
+
+    if(ev.key == "Enter") {
+        getCMD();
+        textField.value = "";
+        code_line.innerHTML = ">";
+    }
+});
+
+
 document.addEventListener("mousemove", followMouse);
 let bound = cmd.getBoundingClientRect();
 
@@ -19,6 +30,17 @@ function typer() {
         code_line.innerHTML = textField.value;
 
     });
+}
+
+function getCMD() {
+
+    if(textField.value == "window_size") {
+       console.log("height:" + window.innerHeight + "px ; width:" + window.innerWidth + "px");
+    }
+
+    if(textField.value == "exit") {
+        cmd.style.display = "none";
+    }
 }
 
 function dragCmd() {
@@ -45,7 +67,6 @@ function dragCmd() {
         }
         
     }
-
 
 typer();
 closer();
