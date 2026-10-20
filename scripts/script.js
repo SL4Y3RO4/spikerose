@@ -9,7 +9,7 @@ let menu_list = document.querySelectorAll(".menu_list");
 let do_list = document.getElementById("menu_list");
 let h3 = document.querySelectorAll("h1");
 let j = 0;
-
+let timing;
 
 window.onload = function() {
     cmd.style.display = "none";
@@ -26,12 +26,13 @@ document.addEventListener("keydown", (ev) => {
 
 
 function animation1() {
+    clearInterval(timing);
     str = "";
     let r = 255;
     let g = 255;
     let b = 255;
 
-    let time = setInterval(function() {
+    timing = setInterval(function() {
 
         str = "rgb(" + r + "," + g + "," + b + ")";
         document.body.style.background = str;
@@ -39,16 +40,26 @@ function animation1() {
         g--;
         b--;
 
+        if(r <= 0 && g <= 0 && b <= 0) {
+               clearInterval(timing);
+               r = 255;
+               g = 255;
+               b = 255;
+        }
+
     }, 5); 
 }
 
+
+
 function animation2() {
+    clearInterval(timing);
     str = "";
     let r = 0;
     let g = 0;
     let b = 0;
 
-    let time = setInterval(function() {
+    timing = setInterval(function() {
 
         str = "rgb(" + r + "," + g + "," + b + ")";
         document.body.style.background = str;
@@ -56,86 +67,128 @@ function animation2() {
         g++;
         b++;
 
+        if(r >= 255 && g >= 255 && b >= 255) {
+               clearInterval(timing);
+               r = 0;
+               g = 0;
+               b = 0;
+        }
+
     }, 5); 
 
 }
 
 function menuAnimation2() {
-    let pixel = 0;
-    let time;
-
             //take all list(<li>)
        for(let i = 0; i < menu_list.length; i++) {
-            menu_list[i].addEventListener("mouseup", () => {
-
-                time = setInterval(function() {
-
-                    menu_list[i].style.textShadow = "pink 0px 0px";
-                    
-
-                       // pixel++;
-
-                }, 20);
+            menu_list[i].addEventListener("mouseup", () => { 
+                    menu_list[i].style.textShadow = "pink 0px 0px";              
             });
         
         }
        
 }
 
-
+let whiteTime;
 
 function setWhite() {
-         for(let i = 0; i < h3.length; i++) {
-             h3[i].style.color = "white";
+
+    clearInterval(whiteTime);
+    let r = 0;
+    let g = 0;
+    let b = 0;
+
+    whiteTime = setInterval(() => {
+
+        for(let i = 0; i < h3.length; i++) {
+             h3[i].style.color = "rgb(" + r + "," + g + "," + b + ")";
          }
 
-         for(let i = 0; i < li.length; i++) {
-             li[i].style.color = "white";
-         }
+        for(let i = 0; i < li.length; i++) {
+             li[i].style.color = "rgb(" + r + "," + g + "," + b + ")";
+        }
+
+        if(r >= 255 && g >= 255 && b >= 255) {
+            clearInterval(whiteTime);
+            r = 0;
+            g = 0;
+            b = 0;
+        }
+
+        r++;
+        g++;
+        b++;
+
+    }, 5);        
 }
 
 function setDefault() {
-    for(let i = 0; i < h3.length; i++) {
-             h3[i].style.color = "black";
+    clearInterval(whiteTime);
+    let r = 255;
+    let g = 255;
+    let b = 255;
+
+    whiteTime = setInterval(() => {
+
+        for(let i = 0; i < h3.length; i++) {
+             h3[i].style.color = "rgb(" + r + "," + g + "," + b + ")";
          }
 
-         for(let i = 0; i < li.length; i++) {
-             li[i].style.color = "black";
-         }
+        for(let i = 0; i < li.length; i++) {
+             li[i].style.color = "rgb(" + r + "," + g + "," + b + ")";
+        }
+
+        if(r <= 0 && g <= 0 && b <= 0) {
+            clearInterval(whiteTime);
+            r = 255;
+            g = 255;
+            b = 255;
+        }
+
+        r--;
+        g--;
+        b--;
+
+    }, 5);     
 }
-
 
 function setToDarkmode() {
 
      darkmode.addEventListener("mousedown", function() {
-        animation1();
-        setWhite();
-        booler = true;
-        if(booler) {
-            darkmode.addEventListener("mousedown", function() {
-            animation2();
-            setDefault();
-            setToDarkmode();
-        });
-        }
-     });  
+            if(!booler) {
+                animation1();
+                setWhite();
+                booler = true;
+            } else {      
+                animation2();
+                setDefault();
+                booler = false;
+            }
+    });
+        
+    
 }
 
 
 function menuAnimation() {
 
     let pixel = 0;
-    let time;
+    let timer;
+    let booler = false;
 
+    if(!booler) { 
             //take all list(<li>)
        for(let i = 0; i < menu_list.length; i++) {
             menu_list[i].addEventListener("mouseover", () => {
 
-                time = setInterval(function() {
+                timer = setInterval(function() {
 
                     menu_list[i].style.textShadow = "pink" + " " + pixel + "px" + " " + pixel + "px";
                     
-                        if(pixel == 5) {
+                        if(pixel == 5) {                      
+                            clearInterval(timer);
+                            booler = true;
+                            pixel = 0;
                             menuAnimation();
                             return;
                         }
@@ -146,30 +199,28 @@ function menuAnimation() {
             });
         
         }
+    }
        
 }
 
-
-
-function setWhite() {
-         for(let i = 0; i < h3.length; i++) {
-             h3[i].style.color = "white";
-         }
-
-         for(let i = 0; i < li.length; i++) {
-             li[i].style.color = "white";
-         }
+function clearFontAnimation(booler) {
+  
+  if(booler) {
+     for(let i = 0; i < menu_list.length; i++) {
+        menu_list[i].addEventListener("mouseup", () => {
+              menu_list[i].style.textShadow = "pink 0px 0px";
+              booler = false;
+              menuAnimation();
+        });
+          
+    }
+  }
+    
 }
 
-function setDefault() {
-    for(let i = 0; i < h3.length; i++) {
-             h3[i].style.color = "black";
-         }
 
-         for(let i = 0; i < li.length; i++) {
-             li[i].style.color = "black";
-         }
-}
+
+
 
 
 function setToDarkmode() {
@@ -213,5 +264,5 @@ function swap2() {
 swap();
 swap2();
 setToDarkmode();
-menuAnimation();
-menuAnimation2();
+//menuAnimation(); 
+//menuAnimation2();

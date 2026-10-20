@@ -92,6 +92,12 @@ a {
     color: black;
 }
 
+/*menu list*/
+
+.menu_list:hover {
+     text-shadow: pink 4px 4px;
+}
+
 #webshell {
     background: black;
     width: 320px;
