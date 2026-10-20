@@ -101,9 +101,16 @@ a {
 #webshell {
     background: black;
     width: 320px;
-
+    position: fixed;
+    z-index:1;
+    left: 50%;
+    top:20%;
 }
 
 #webshell h2 {
     color:lime;
+}
+
+#webshell input[type=text] {
+    background: black;
 }

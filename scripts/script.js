@@ -8,6 +8,7 @@ let booler = false;
 let menu_list = document.querySelectorAll(".menu_list");
 let do_list = document.getElementById("menu_list");
 let h3 = document.querySelectorAll("h1");
+let bookname = document.getElementById("bookname");
 let j = 0;
 let timing;
 
@@ -239,6 +240,9 @@ function setToDarkmode() {
      });  
 }
 
+//bookShower
+
+booknames = ["moon bite", "oof", "sweet"];
 
 function swap() {
 
@@ -248,6 +252,7 @@ function swap() {
         }
         j++;
         image.src = arr[j];
+        bookname.innerText = booknames[j];
     }); 
 }
 
@@ -258,6 +263,7 @@ function swap2() {
         }
         j--;
         image.src = arr[j];
+        bookname.innerText = booknames[j];
    });
 }
 
