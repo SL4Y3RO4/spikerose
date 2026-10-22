@@ -6,7 +6,6 @@ let arr = ["imgs/image.png", "imgs/oof.jpg", "imgs/image3.png"];
 let li = document.querySelectorAll("li");
 let booler = false;
 let menu_list = document.querySelectorAll(".menu_list");
-let do_list = document.getElementById("menu_list");
 let h3 = document.querySelectorAll("h1");
 let bookname = document.getElementById("bookname");
 let j = 0;
@@ -79,16 +78,7 @@ function animation2() {
 
 }
 
-function menuAnimation2() {
-            //take all list(<li>)
-       for(let i = 0; i < menu_list.length; i++) {
-            menu_list[i].addEventListener("mouseup", () => { 
-                    menu_list[i].style.textShadow = "pink 0px 0px";              
-            });
-        
-        }
-       
-}
+
 
 let whiteTime;
 
@@ -170,58 +160,35 @@ function setToDarkmode() {
     
 }
 
-
+//menu animation method
 function menuAnimation() {
 
     let pixel = 0;
-    let timer;
-    let booler = false;
+    let phpmerda;
 
-    if(!booler) { 
-            //take all list(<li>)
-       for(let i = 0; i < menu_list.length; i++) {
-            menu_list[i].addEventListener("mouseover", () => {
+    for(let i = 0; i < menu_list.length; i++) {
 
-                timer = setInterval(function() {
-
-                    menu_list[i].style.textShadow = "pink" + " " + pixel + "px" + " " + pixel + "px";
+            menu_list[i].addEventListener("mouseover", () => { 
+                phpmerda = setInterval(() => {
+                    menu_list[i].style.textShadow = "pink " + pixel + "px " + pixel + "px";
                     
-                        if(pixel == 5) {                      
-                            clearInterval(timer);
-                            booler = true;
-                            pixel = 0;
-                            menuAnimation();
-                            return;
-                        }
+                    if(pixel == 5) {
+                       clearInterval(phpmerda);
+                       pixel = 0;
+                       return;
+                    }
 
-                        pixel++;
-
-                }, 20);
-            });
-        
-        }
+                    pixel++;
+                }, 5);
+                          
+            })
+      
+            menu_list[i].addEventListener("mouseout", () => { 
+                menu_list[i].style.textShadow = "pink 0px 0px";            
+            }) 
     }
        
 }
-
-function clearFontAnimation(booler) {
-  
-  if(booler) {
-     for(let i = 0; i < menu_list.length; i++) {
-        menu_list[i].addEventListener("mouseup", () => {
-              menu_list[i].style.textShadow = "pink 0px 0px";
-              booler = false;
-              menuAnimation();
-        });
-          
-    }
-  }
-    
-}
-
-
-
-
 
 
 function setToDarkmode() {
@@ -270,5 +237,4 @@ function swap2() {
 swap();
 swap2();
 setToDarkmode();
-//menuAnimation(); 
-//menuAnimation2();
+menuAnimation(); 
