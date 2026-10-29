@@ -13,3 +13,9 @@
     left: 40%;  
     box-shadow: rgb(255, 0, 179) 8px 8px;  
 }
+
+#storytelling {
+    position: absolute;
+    top:80%;
+    left:44%;
+}
